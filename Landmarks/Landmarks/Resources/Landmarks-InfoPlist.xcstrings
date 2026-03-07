@@ -7,31 +7,31 @@
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "المعالم"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Orte"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Landmarks"
+            "value" : "Landmarks Tutorial"
           }
         },
         "he" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "אתרי תיירות"
           }
         },
         "th" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "แลนด์มาร์ก"
           }
         }
