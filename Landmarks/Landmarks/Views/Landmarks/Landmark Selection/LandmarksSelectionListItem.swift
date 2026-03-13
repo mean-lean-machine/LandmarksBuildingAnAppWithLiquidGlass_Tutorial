@@ -16,6 +16,7 @@ struct LandmarksSelectionListItem: View {
         HStack {
             Image(landmark.thumbnailImageName)
                 .resizable()
+                .accessibilityIdentifier("LandmarksSelectionListItem_Image_\(landmark.id)")
                 .aspectRatio(contentMode: .fill)
                 .frame(width: Constants.landmarkSelectionImageSize.width,
                        height: Constants.landmarkSelectionImageSize.height)
@@ -23,6 +24,7 @@ struct LandmarksSelectionListItem: View {
                 .padding(.trailing, Constants.standardPadding)
             Text(landmark.name)
                 .font(.title3)
+                .accessibilityIdentifier("LandmarksSelectionListItem_Name_\(landmark.id)")
             Spacer()
             if landmarks.contains(landmark) {
                 Image(systemName: "checkmark.circle.fill")
@@ -30,16 +32,17 @@ struct LandmarksSelectionListItem: View {
                     .foregroundStyle(.white, .indigo)
                     .font(.title)
                     .padding(.trailing, Constants.standardPadding)
-
+                    .accessibilityIdentifier("LandmarksSelectionListItem_SelectedIcon_\(landmark.id)")
             } else {
                 Image(systemName: "circle")
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(.gray)
                     .font(.title)
                     .padding(.trailing, Constants.standardPadding)
-
+                    .accessibilityIdentifier("LandmarksSelectionListItem_UnselectedIcon_\(landmark.id)")
             }
         }
+        .accessibilityIdentifier("LandmarksSelectionListItem_\(landmark.id)")
     }
 }
 
