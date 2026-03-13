@@ -42,6 +42,14 @@ enum NavigationOptions: Equatable, Hashable, Identifiable {
         }
     }
     
+    var accessibilityIdentifier: String {
+        switch self {
+        case .landmarks: return "navigationOption_landmarks"
+        case .map: return "navigationOption_map"
+        case .collections: return "navigationOption_collections"
+        }
+    }
+    
     /// A view builder that the split view uses to show a view for the selected navigation option.
     @MainActor @ViewBuilder func viewForPage() -> some View {
         switch self {
