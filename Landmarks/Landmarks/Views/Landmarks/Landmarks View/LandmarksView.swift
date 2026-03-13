@@ -20,12 +20,14 @@ struct LandmarksView: View {
 
                 LandmarkFeaturedItemView(landmark: modelData.featuredLandmark!)
                     .flexibleHeaderContent()
+                    .accessibilityIdentifier("LandmarksView_FeaturedItem")
 
                 ForEach(ModelData.orderedContinents, id: \.self) { continent in
                     Group {
                         ContinentTitleView(title: continent.name)
                         if let landmarkList = modelData.landmarksByContinent[continent] {
                             LandmarkHorizontalListView(landmarkList: landmarkList)
+                                .accessibilityIdentifier("LandmarksView_ContinentSection_\(continent.name)")
                                 .containerRelativeFrame(.vertical) { height, axis in
                                     let proposedHeight = height * Constants.landmarkListPercentOfHeight
                                     if proposedHeight > Constants.landmarkListMinimumHeight {
@@ -41,6 +43,7 @@ struct LandmarksView: View {
         .flexibleHeaderScrollView()
         .ignoresSafeArea(.keyboard)
         .ignoresSafeArea(edges: .top)
+        .accessibilityIdentifier("LandmarksView_ScrollView")
         .toolbar(removing: .title)
         .navigationDestination(for: Landmark.self) { landmark in
             LandmarkDetailView(landmark: landmark)
@@ -58,6 +61,7 @@ private struct ContinentTitleView: View {
             .padding(.top, Constants.titleTopPadding)
             .padding(.bottom, Constants.titleBottomPadding)
             .padding(.leading, Constants.leadingContentInset)
+            .accessibilityIdentifier("LandmarksView_ContinentTitle_\(title)")
     }
 }
 

@@ -17,6 +17,7 @@ struct ReadabilityRoundedRectangle: View {
             )
             .containerRelativeFrame(.vertical)
             .clipped()
+            .accessibilityIdentifier("ReadabilityRoundedRectangle")
     }
 }
 

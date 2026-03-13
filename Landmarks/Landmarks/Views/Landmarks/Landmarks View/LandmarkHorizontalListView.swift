@@ -22,9 +22,11 @@ struct LandmarkHorizontalListView: View {
                             .aspectRatio(Constants.landmarkListItemAspectRatio, contentMode: .fill)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("LandmarkHorizontalListView_NavigationLink_\(landmark.id)")
                 }
             }
         }
+        .accessibilityIdentifier("LandmarkHorizontalListView_ScrollView")
     }
 }
 

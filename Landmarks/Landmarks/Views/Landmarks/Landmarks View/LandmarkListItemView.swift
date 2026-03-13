@@ -14,6 +14,7 @@ struct LandmarkListItemView: View {
     var body: some View {
         Image(landmark.thumbnailImageName)
             .resizable()
+            .accessibilityIdentifier("LandmarkListItemView_Image_\(landmark.id)")
             .aspectRatio(contentMode: .fill)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .overlay {
@@ -27,12 +28,14 @@ struct LandmarkListItemView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.bottom)
+                    .accessibilityIdentifier("LandmarkListItemView_Name_\(landmark.id)")
             }
             .contextMenu {
                 ShareLink(item: landmark, preview: landmark.sharePreview)
                 LandmarkFavoriteButton(landmark: landmark)
                 LandmarkCollectionsMenu(landmark: landmark)
             }
+            .accessibilityIdentifier("LandmarkListItemView_\(landmark.id)")
     }
 }
 
