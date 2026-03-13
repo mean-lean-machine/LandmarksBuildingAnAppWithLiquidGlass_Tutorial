@@ -17,7 +17,9 @@ struct LandmarksSelectionList: View {
         NavigationStack {
             List {
                 ForEach(ModelData.orderedContinents, id: \.self) { continent in
-                    Section(header: Text(continent.name)) {
+                    let sectionHeader = Text(continent.name)
+                        .accessibilityIdentifier("LandmarksSelectionList_SectionHeader_\(continent.name)")
+                    Section(header: sectionHeader) {
                         ForEach(modelData.landmarks(in: continent)) { landmark in
                             LandmarksSelectionListItem(landmark: landmark, landmarks: $landmarks)
                                 .onTapGesture {
@@ -33,16 +35,19 @@ struct LandmarksSelectionList: View {
                     }
                 }
             }
+            .accessibilityIdentifier("LandmarksSelectionList_List")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .navigationTitle("Select landmarks")
+            .accessibilityIdentifier("LandmarksSelectionList_NavigationTitle")
             .toolbar {
                 Button {
                     dismiss()
                 } label: {
                     Image(systemName: "checkmark")
                 }
+                .accessibilityIdentifier("LandmarksSelectionList_DoneButton")
             }
         }
     }
