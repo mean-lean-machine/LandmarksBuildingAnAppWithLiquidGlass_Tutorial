@@ -22,9 +22,12 @@ struct LandmarksSplitView: View {
                         NavigationLink(value: page) {
                             Label(page.name, systemImage: page.symbolName)
                         }
+                        .accessibilityIdentifier("navigationOptionLink_\(page.name)")
                     }
                 }
+                .accessibilityIdentifier("navigationOptionsSection")
             }
+            .accessibilityIdentifier("navigationOptionsList")
             .navigationDestination(for: NavigationOptions.self) { page in
                 NavigationStack(path: $modelData.path) {
                     page.viewForPage()
@@ -38,10 +41,13 @@ struct LandmarksSplitView: View {
                 .showsBadges()
             }
             .frame(minWidth: 150)
-        } detail: {
+        }
+        .accessibilityIdentifier("landmarksSplitView")
+        detail: {
             NavigationStack(path: $modelData.path) {
                 NavigationOptions.landmarks.viewForPage()
             }
+            .accessibilityIdentifier("landmarksDetailNavigationStack")
             .navigationDestination(for: Landmark.self) { landmark in
                 LandmarkDetailView(landmark: landmark)
             }
