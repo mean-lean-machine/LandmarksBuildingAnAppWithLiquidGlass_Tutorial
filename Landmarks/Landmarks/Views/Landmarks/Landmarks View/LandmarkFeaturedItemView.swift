@@ -19,6 +19,7 @@ struct LandmarkFeaturedItemView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .clipped()
+                .accessibilityIdentifier("featuredLandmarkImage")
                 .backgroundExtensionEffect()
                 .overlay(alignment: .bottom) {
                     VStack {
@@ -27,20 +28,24 @@ struct LandmarkFeaturedItemView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .opacity(0.8)
+                            .accessibilityIdentifier("featuredLandmarkHeadline")
                         Text(landmark.name)
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .accessibilityIdentifier("featuredLandmarkName")
                         Button("Learn More") {
                             modelData.path.append(landmark)
                         }
                         .buttonStyle(.borderedProminent)
+                        .accessibilityIdentifier("learnMoreButton")
                         .padding(.bottom, Constants.learnMorePadding)
                     }
                     .padding([.bottom], Constants.learnMoreBottomPadding)
                 }
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("featuredLandmarkNavigationLink")
     }
 }
 
