@@ -15,11 +15,15 @@ struct CollectionListItemView: View {
         VStack {
             collection.imageForListItem()
                 .cornerRadius(Constants.cornerRadius)
+                .accessibilityIdentifier("CollectionListItemView_Image")
             Text(collection.name)
+                .accessibilityIdentifier("CollectionListItemView_Name")
             Text("\(collection.landmarks.count) items")
                 .font(.callout)
                 .foregroundStyle(.secondary)
+                .accessibilityIdentifier("CollectionListItemView_Count")
         }
+        .accessibilityIdentifier("CollectionListItemView_VStack")
     }
 }
 
