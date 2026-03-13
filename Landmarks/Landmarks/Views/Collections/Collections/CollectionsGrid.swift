@@ -19,9 +19,12 @@ struct CollectionsGrid: View {
                         CollectionListItemView(collection: collection)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("CollectionsGrid_NavigationLink_\(collection.id)")
                 }
             }
+            .accessibilityIdentifier("CollectionsGrid_LazyVGrid")
         }
+        .accessibilityIdentifier("CollectionsGrid_ScrollView")
         .padding(.trailing, Constants.standardPadding)
     }
     
