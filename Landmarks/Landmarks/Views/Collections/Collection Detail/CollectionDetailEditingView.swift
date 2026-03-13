@@ -32,6 +32,7 @@ struct CollectionDetailEditingView: View {
                     HStack {
                         Text(collection.name)
                             .font(.largeTitle)
+                            .accessibilityIdentifier("editCollectionTitle")
                         Spacer()
                     }
                     .padding()
@@ -39,6 +40,7 @@ struct CollectionDetailEditingView: View {
                     TextField("Name", text: $collection.name)
                         .padding()
                         .textFieldStyle(.plain)
+                        .accessibilityIdentifier("editCollectionTitle")
                 }
             }
             .background(Constants.editingBackgroundStyle, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
@@ -59,6 +61,7 @@ struct CollectionDetailEditingView: View {
                         .scrollContentBackground(.hidden)
                         .frame(height: Constants.textEditorHeight)
                         .padding()
+                        .accessibilityIdentifier("editCollectionDescription")
                 }
                 .background(Constants.editingBackgroundStyle, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
             }
@@ -79,9 +82,11 @@ struct CollectionDetailEditingView: View {
                         isShowingLandmarksSelection.toggle()
                     }
                     .padding([.top, .leading, .trailing])
+                    .accessibilityIdentifier("editLandmarksSelectButton")
                 }
                 LandmarksGrid(landmarks: $collection.landmarks, forEditing: true)
                     .padding([.leading, .trailing, .bottom])
+                    .accessibilityIdentifier("editLandmarksGrid")
             }
             .background(Constants.editingBackgroundStyle, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
         }

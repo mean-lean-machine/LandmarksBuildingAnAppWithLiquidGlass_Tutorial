@@ -71,6 +71,7 @@ struct CollectionDetailView: View {
                         Text("Edit", comment: "The text label on a button to switch to editor mode.")
                     }
                 }
+                .accessibilityIdentifier("editModeButton")
             }
         }
     }
@@ -82,6 +83,7 @@ struct CollectionDetailView: View {
             Image(systemName: "trash")
                 .foregroundStyle(.red)
         }
+        .accessibilityIdentifier("deleteCollectionButton")
         .confirmationDialog("Delete?",
                             isPresented: $isShowingDeleteConfirmation,
                             presenting: collection) { collection in
@@ -94,9 +96,11 @@ struct CollectionDetailView: View {
             } label: {
                 Text("Delete", comment: "Delete button shown in an alert asking for confirmation to delete the collection.")
             }
+            .accessibilityIdentifier("deleteConfirmationDeleteButton")
             Button("Keep") {
                 isShowingDeleteConfirmation = false
             }
+            .accessibilityIdentifier("deleteConfirmationKeepButton")
         } message: { details in
             Text("Select Delete to permanently remove ‘\(collection.name)’.",
                  comment: "Message in an alert asking the person whether they want to delete a collection with a given name.")
