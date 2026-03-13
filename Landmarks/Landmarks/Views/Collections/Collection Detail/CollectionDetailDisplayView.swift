@@ -19,6 +19,7 @@ struct CollectionDetailDisplayView: View {
                     .fontWeight(.medium)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding([.top])
+                    .accessibilityIdentifier("collectionTitle")
                 Spacer()
             }
             HStack {
@@ -26,9 +27,11 @@ struct CollectionDetailDisplayView: View {
                     .font(.title2)
                     .padding([.top, .bottom])
                     .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("collectionDescription")
                 Spacer()
             }
             LandmarksGrid(landmarks: $collection.landmarks, forEditing: false)
+                .accessibilityIdentifier("landmarksGrid")
         }
         .padding([.leading, .trailing], Constants.leadingContentInset)
     }
