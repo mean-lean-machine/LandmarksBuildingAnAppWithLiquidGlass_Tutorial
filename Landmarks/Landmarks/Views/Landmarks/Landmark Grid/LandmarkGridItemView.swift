@@ -14,18 +14,21 @@ struct LandmarkGridItemView: View {
     var body: some View {
         Image(landmark.thumbnailImageName)
             .resizable()
+            .accessibilityIdentifier("LandmarkGridItemView_Image_\(landmark.id)")
             .aspectRatio(1, contentMode: .fill)
             .overlay {
                 ReadabilityRoundedRectangle()
             }
             .clipped()
             .cornerRadius(Constants.cornerRadius)
+            .accessibilityIdentifier("LandmarkGridItemView_\(landmark.id)")
             .overlay(alignment: .bottom) {
                 Text(landmark.name)
                     .font(.title3)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.bottom)
+                    .accessibilityIdentifier("LandmarkGridItemView_Name_\(landmark.id)")
             }
     }
 }
