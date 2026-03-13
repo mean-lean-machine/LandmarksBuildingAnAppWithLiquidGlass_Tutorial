@@ -23,10 +23,13 @@ struct LandmarksGrid: View {
                             LandmarkGridItemView(landmark: landmark)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("LandmarksGrid_NavigationLink_\(landmark.id)")
                     }
                 }
             }
+            .accessibilityIdentifier("LandmarksGrid_Grid")
         }
+        .accessibilityIdentifier("LandmarksGrid_ScrollView")
     }
     
     private var columns: [GridItem] {
