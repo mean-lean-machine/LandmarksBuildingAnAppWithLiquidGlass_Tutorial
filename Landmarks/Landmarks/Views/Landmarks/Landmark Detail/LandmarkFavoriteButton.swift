@@ -18,6 +18,7 @@ struct LandmarkFavoriteButton: View {
         } label: {
             FavoriteButtonLabel(isFavorite: modelData.isFavorite(landmark))
         }
+        .accessibilityIdentifier("FavoriteButton")
     }
 }
 
@@ -26,6 +27,7 @@ private struct FavoriteButtonLabel: View {
     var body: some View {
         Label(isFavorite ? "Unfavorite" : "Favorite", systemImage: "heart")
             .symbolVariant(isFavorite ? .fill : .none)
+            .accessibilityIdentifier("FavoriteButtonLabel")
     }
 }
 
