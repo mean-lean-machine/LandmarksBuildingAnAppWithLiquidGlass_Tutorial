@@ -22,14 +22,17 @@ struct LandmarkDetailView: View {
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .backgroundExtensionEffect()
                     .flexibleHeaderContent()
+                    .accessibilityIdentifier("LandmarkBckgndImage-\(landmark.id)")
 
                 VStack(alignment: .leading) {
                     Text(landmark.name)
                         .font(.title)
                         .fontWeight(.bold)
+                        .accessibilityIdentifier("LandmarkName-\(landmark.id)")
 
                     Text(landmark.description)
                         .textSelection(.enabled)
+                        .accessibilityIdentifier("LandmarkDescription-\(landmark.id)")
                 }
                 .padding(.leading, Constants.leadingContentInset)
                 .padding(.trailing, Constants.leadingContentInset * 2)
@@ -41,14 +44,17 @@ struct LandmarkDetailView: View {
 
             ToolbarItem {
                 ShareLink(item: landmark, preview: landmark.sharePreview)
+                    .accessibilityIdentifier("ShareButton-\(landmark.id)")
             }
 
             ToolbarSpacer(.fixed)
             
             ToolbarItemGroup {
                 LandmarkFavoriteButton(landmark: landmark)
+                    .accessibilityIdentifier("ToolbarFavoriteButton-\(landmark.id)")
 
                 LandmarkCollectionsMenu(landmark: landmark)
+                    .accessibilityIdentifier("ToolbarCollectionsMenu-\(landmark.id)")
             }
             
             ToolbarSpacer(.fixed)
@@ -58,6 +64,7 @@ struct LandmarkDetailView: View {
                     modelData.selectedLandmark = landmark
                     modelData.isLandmarkInspectorPresented.toggle()
                 }
+                .accessibilityIdentifier("InfoButton")
             }
         }
         .toolbar(removing: .title)
