@@ -21,13 +21,11 @@ struct MapView: View {
         Map(selection: $selection) {
             ForEach(modelData.mapItemsForLandmarks, id: \.self) { landmarkMapItem in
                 Marker(item: landmarkMapItem)
-                    .accessibilityIdentifier("landmarkMarker")
             }
             .mapItemDetailSelectionAccessory()
             
             if modelData.locationFinder?.currentLocation != nil {
                 UserAnnotation()
-                    .accessibilityIdentifier("userLocationAnnotation")
             }
         }
         .mapStyle(.standard(pointsOfInterest: .excludingAll))
