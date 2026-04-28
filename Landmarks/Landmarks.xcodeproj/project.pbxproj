@@ -147,7 +147,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					12A5DBD72F68946A005D9A1A = {
@@ -413,12 +413,15 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Landmarks Tutorial";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Landmarks uses your location to show where you are on the map relative to other landmarks.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Landmarks uses your microphone for voice search.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Landmarks uses speech recognition to convert your voice into a search query.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -471,12 +474,15 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Landmarks Tutorial";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Landmarks uses your location to show where you are on the map relative to other landmarks.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Landmarks uses your microphone for voice search.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Landmarks uses speech recognition to convert your voice into a search query.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
