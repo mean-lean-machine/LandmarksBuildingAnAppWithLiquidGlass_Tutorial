@@ -41,9 +41,7 @@ struct LandmarksSplitView: View {
                 .showsBadges()
             }
             .frame(minWidth: 150)
-        }
-        .accessibilityIdentifier("landmarksSplitView")
-        detail: {
+        } detail: {
             NavigationStack(path: $modelData.path) {
                 NavigationOptions.landmarks.viewForPage()
             }
@@ -56,6 +54,13 @@ struct LandmarksSplitView: View {
         // Adds global search, where the system positions the search bar automatically
         // in content views.
         .searchable(text: $modelData.searchString, prompt: "Search")
+        // Adds a microphone button to the toolbar that dictates into the
+        // search field via on-device speech recognition.
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                VoiceSearchButton(searchText: $modelData.searchString)
+            }
+        }
         // Adds the inspector, which the landmark detail view uses to display
         // additional information.
         .inspector(isPresented: $modelData.isLandmarkInspectorPresented) {
