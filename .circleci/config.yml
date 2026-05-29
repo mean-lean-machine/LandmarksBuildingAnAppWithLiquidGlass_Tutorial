@@ -13,6 +13,12 @@ jobs:
   build-test-and-notify:
     executor:
       name: node/default
+      
+docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+      
     steps:
       - checkout
       - run:
