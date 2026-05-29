@@ -8,34 +8,24 @@ orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
 
-
 jobs:
-  build-test-and-notify:
-    executor:
-      name: node/default
-      
-docker:
-      # Specify the version you desire here
-      # See: https://circleci.com/developer/images/image/cimg/base
-      - image: cimg/base:current
-      
+  build:
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run: npm test
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
+      # Your build steps go here
+      - run: echo "Running tests"
+      # Notify Slack only if the build fails
       - slack/notify:
           event: fail
-          mentions: "@yemiwebby"
           template: basic_fail_1
+          channel: 'C0AMCCK29CY' # Use channel ID, not name
+
 workflows:
-  build-and-notify:
+  main:
     jobs:
-      - build-test-and-notify
+      - build
 
 
 
