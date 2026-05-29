@@ -7,26 +7,21 @@ version: 2.1
 orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
-
 jobs:
   build:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run:
-          name: Run Build and Tests
-          command: echo "Building..."
-      
-      # This step executes at the end and posts for both success and failure
+      # Your build steps go here
+      - run: echo "Running tests"
+      # Notify Slack only if the build fails
       - slack/notify:
-          event: always
-          channel: 'C0AMCCK29CY' # Best to use the alphanumeric channel ID
-          template: success_plus_fail_v1
+          event: fail
+          template: basic_fail_1
+          channel: 'your-slack-channel-id' # Use channel ID, not name
 
 workflows:
   main:
     jobs:
       - build
-
-
