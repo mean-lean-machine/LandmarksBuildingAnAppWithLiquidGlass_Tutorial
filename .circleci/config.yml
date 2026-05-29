@@ -14,18 +14,19 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      # Your build steps go here
-      - run: echo "Running tests"
-      # Notify Slack only if the build fails
+      - run:
+          name: Run Build and Tests
+          command: echo "Building..."
+      
+      # This step executes at the end and posts for both success and failure
       - slack/notify:
-          event: pass
-          template: basic_pass_1
-          channel: 'C0AMCCK29CY' # Use channel ID, not name
+          event: always
+          channel: 'C0AMCCK29CY' # Best to use the alphanumeric channel ID
+          template: success_plus_fail_v1
 
 workflows:
   main:
     jobs:
       - build
-
 
 
