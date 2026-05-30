@@ -9,23 +9,13 @@ orbs:
   slack: circleci/slack@6.1.3
 
 jobs:
-  build-test-and-notify:
-    executor:
-      name: node/default
+  notify:
+    docker:
+      - image: cimg/base:current
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run: npm test
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
-      - slack/notify:
-          event: fail
-          mentions: "@yemiwebby"
-          template: basic_fail_1
-workflows:
-  build-and-notify:
-    jobs:
-      - build-test-and-notify
