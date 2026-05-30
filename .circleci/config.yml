@@ -7,15 +7,16 @@ version: 2.1
 orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
-
 jobs:
   notify:
     docker:
       - image: cimg/base:current
     steps:
       - slack/notify:
+          channel: 'C0AMCCK29CY, D0ALWQJ1JP3'
           event: fail
           template: basic_fail_1
       - slack/notify:
+          channel: 'C0AMCCK29CY, D0ALWQJ1JP3'
           event: pass
           template: success_tagged_deploy_1
