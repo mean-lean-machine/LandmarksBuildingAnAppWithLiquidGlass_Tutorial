@@ -19,7 +19,7 @@ jobs:
       - slack/notify:
           event: fail
           template: basic_fail_1
-          channel: 'your-slack-channel-id' # Use channel ID, not name
+          channel: 'C0AMCCK29CY', 'D01FVU1P3S8' # Use channel ID, not name
 
 workflows:
   main:
