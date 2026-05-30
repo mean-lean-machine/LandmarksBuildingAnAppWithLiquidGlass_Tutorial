@@ -8,26 +8,48 @@ orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
 jobs:
-  deploy:
-    executor:
-      name: node/default
+  build:
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
-      - node/install-packages
-        app-dir: ~/LandmarksBuildingAnAppWithLiquidGlass/Landmarks
-      - run:
-          command: npm run deploy
+      # Your build steps go here
+      - run: echo "Running tests"
+      # Notify Slack if the build fails/succeeds
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+          channel: C0AMCCK29CY # Use channel ID, not name
       - slack/notify:
           channel: C0AMCCK29CY
           event: pass
           template: success_tagged_deploy_1
+
 workflows:
-  deploy_and_notify:
+  main:
     jobs:
-      - deploy:
-          context:
-            - slack-secrets
+      - build
 
 
 
+#jobs:
+ # deploy:
+  #  executor:
+   #   name: node/default
+    #steps:
+     # - checkout
+      #- node/install-packages
+       # app-dir: ~/LandmarksBuildingAnAppWithLiquidGlass/Landmarks
+      #- run:
+       #   command: npm run deploy
+      #- slack/notify:
+       #   channel: C0AMCCK29CY
+        #  event: pass
+         # template: success_tagged_deploy_1
+#workflows:
+ # deploy_and_notify:
+  #  jobs:
+   #   - deploy:
+    #      context:
+     #       - slack-secrets
 
