@@ -8,25 +8,21 @@ orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
 jobs:
-build-test-and-notify:
+  deploy:
     executor:
       name: node/default
     steps:
       - checkout
+      - node/install-packages
       - run:
-          name: Install dependencies
-          command: npm install
-      - run: npm test
+          command: npm run deploy
       - slack/notify:
-          channel: 'C0AMCCK29CY, D0ALWQJ1JP3'
-          event: fail
-          template: basic_fail_1
-      - slack/notify:
-          channel: 'C0AMCCK29CY, D0ALWQJ1JP3'
+          channel: C0AMCCK29CY
           event: pass
           template: success_tagged_deploy_1
-
 workflows:
-  build-and-notify:
+  deploy_and_notify:
     jobs:
-      - build-test-and-notify
+      - deploy:
+          context:
+            - slack-secrets
