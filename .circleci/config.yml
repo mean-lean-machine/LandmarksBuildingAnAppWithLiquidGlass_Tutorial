@@ -15,13 +15,41 @@ jobs:
       - checkout
       # Your build steps go here
       - run: echo "Running tests"
-      # Notify Slack only if the build fails
+      # Notify Slack if the build fails/succeeds
       - slack/notify:
           event: fail
           template: basic_fail_1
-          channel: 'your-slack-channel-id' # Use channel ID, not name
+          channel: C0AMCCK29CY # Use channel ID, not name
+      - slack/notify:
+          channel: C0AMCCK29CY
+          event: pass
+          template: success_tagged_deploy_1
 
 workflows:
   main:
     jobs:
       - build
+
+
+
+#jobs:
+ # deploy:
+  #  executor:
+   #   name: node/default
+    #steps:
+     # - checkout
+      #- node/install-packages
+       # app-dir: ~/LandmarksBuildingAnAppWithLiquidGlass/Landmarks
+      #- run:
+       #   command: npm run deploy
+      #- slack/notify:
+       #   channel: C0AMCCK29CY
+        #  event: pass
+         # template: success_tagged_deploy_1
+#workflows:
+ # deploy_and_notify:
+  #  jobs:
+   #   - deploy:
+    #      context:
+     #       - slack-secrets
+
