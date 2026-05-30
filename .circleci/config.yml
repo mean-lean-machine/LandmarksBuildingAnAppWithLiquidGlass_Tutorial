@@ -4,26 +4,37 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
+
 orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
 jobs:
-  build:
+  notify:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:current
     steps:
-      - checkout
-      - run:
-          name: Run Build and Tests
-          command: echo "Building..."
-      
-      # This step executes at the end and posts for both success and failure
       - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
           event: always
-          channel: 'C0AMCCK29CY' # Best to use the alphanumeric channel ID
-          template: success_plus_fail_v1
-
 workflows:
-  main:
+  send-notification:
     jobs:
-      - build
+      - notify
+
+
+          #channel: 'C0AMCCK29CY' # Best to use the alphanumeric channel ID
+         
