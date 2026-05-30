@@ -24,6 +24,16 @@
 		D82EA0F52D5692FD00493877 /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E0D4A0782FCA783A0051E3FE /* Exceptions for "Landmarks" folder in "Landmarks" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Package,
+			);
+			target = D82EA0F42D5692FD00493877 /* Landmarks */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		12A5DBD92F68946A005D9A1A /* LandmarksTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -32,6 +42,9 @@
 		};
 		D82EA0F72D5692FD00493877 /* Landmarks */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E0D4A0782FCA783A0051E3FE /* Exceptions for "Landmarks" folder in "Landmarks" target */,
+			);
 			path = Landmarks;
 			sourceTree = "<group>";
 		};
