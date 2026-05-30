@@ -9,32 +9,23 @@ orbs:
   node: circleci/node@7.2.1
   slack: circleci/slack@6.1.3
 jobs:
-  notify:
-    docker:
-      - image: cimg/base:current
+  build-test-and-notify:
+    executor:
+      name: node/default
     steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run: npm test
       - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
+          event: pass
+          template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          mentions: "@yemiwebby"
+          template: basic_fail_1
 workflows:
-  send-notification:
+  build-and-notify:
     jobs:
-      - notify
-
-
-          #channel: 'C0AMCCK29CY' # Best to use the alphanumeric channel ID
-         
+      - build-test-and-notify
