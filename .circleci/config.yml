@@ -14,6 +14,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+        app-dir: ~/LandmarksBuildingAnAppWithLiquidGlass/Landmarks
       - run:
           command: npm run deploy
       - slack/notify:
@@ -26,3 +27,7 @@ workflows:
       - deploy:
           context:
             - slack-secrets
+
+
+
+
