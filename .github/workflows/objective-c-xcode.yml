@@ -1,4 +1,6 @@
-name: Xcode - Build and Analyze
+- name: Build and Test
+  working-directory: ./Landmarks
+  run: xcodebuild -scheme Landmarks test
 
 on:
   push:
