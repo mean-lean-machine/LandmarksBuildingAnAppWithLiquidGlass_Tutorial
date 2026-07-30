@@ -58,6 +58,7 @@
 		D82EA0EC2D5692FD00493877 = {
 			isa = PBXGroup;
 			children = (
+				E05BBA342FCC92DA007CCEA2 /* TestFlight */,
 				9AFBAAF37D3D2CD5D83C356B /* README.md */,
 				D82EA0F72D5692FD00493877 /* Landmarks */,
 				12A5DBD92F68946A005D9A1A /* LandmarksTests */,
@@ -83,6 +84,13 @@
 			);
 			name = LICENSE;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		E05BBA342FCC92DA007CCEA2 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		F81A15098011BE5B986CF307 /* Configuration */ = {
@@ -409,7 +417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = VLCJR5LVH3;
+				DEVELOPMENT_TEAM = QYDW2XADD8;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
