@@ -9,12 +9,33 @@ orbs:
   slack: circleci/slack@6.1.3
 jobs:
   build:
-    docker:
-      - image: cimg/base:stable
+    macos:
+      xcode: 26.6.0
+    resource_class: macos.m1.medium.gen1
     steps:
       - checkout
-      # Your build steps go here
-      - run: echo "Running tests"
+      - node/install:
+          node-version: "20.19"
+      - run:
+          name: Run tests
+          working_directory: Landmarks
+          command: |
+            xcodebuild test \
+              -project Landmarks.xcodeproj \
+              -scheme Landmarks \
+              -destination 'platform=iOS Simulator,name=iPhone 17' \
+              -resultBundlePath TestResults.xcresult
+      - run:
+          name: Generate Allure report
+          working_directory: Landmarks
+          when: always
+          command: npx --yes allure generate TestResults.xcresult --output allure-report
+      - store_artifacts:
+          path: Landmarks/allure-report
+          destination: allure-report
+      - store_artifacts:
+          path: Landmarks/TestResults.xcresult
+          destination: xcresult
       # Notify Slack if the build fails/succeeds
       - slack/notify:
           event: fail
