@@ -81,9 +81,9 @@ jobs:
       - slack/notify:
           event: fail
           custom: ${SLACK_CUSTOM_TEMPLATE}
-          channel: C0AMCCK29CY # Use channel ID, not name
+          channel: C075YL2TVFY # #automation_test_results
       - slack/notify:
-          channel: C0AMCCK29CY
+          channel: C075YL2TVFY # #automation_test_results
           event: pass
           custom: ${SLACK_CUSTOM_TEMPLATE}
 
