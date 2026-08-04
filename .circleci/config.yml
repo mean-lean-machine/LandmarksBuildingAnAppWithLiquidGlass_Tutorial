@@ -36,15 +36,56 @@ jobs:
       - store_artifacts:
           path: Landmarks/TestResults.xcresult
           destination: xcresult
-      # Notify Slack if the build fails/succeeds
+      - run:
+          name: Prepare Slack notification
+          working_directory: Landmarks
+          when: always
+          command: |
+            command -v jq >/dev/null 2>&1 || brew install jq
+
+            SUMMARY=$(xcrun xcresulttool get test-results summary --path TestResults.xcresult --format json 2>/dev/null || echo '{}')
+            ALLURE_URL="https://output.circle-artifacts.com/output/job/${CIRCLE_WORKFLOW_JOB_ID}/artifacts/0/allure-report/index.html"
+
+            echo "$SUMMARY" | jq \
+              --arg allure_url "$ALLURE_URL" \
+              --arg build_url "$CIRCLE_BUILD_URL" \
+              --arg branch "$CIRCLE_BRANCH" \
+              --arg project "$CIRCLE_PROJECT_REPONAME" \
+              '{
+                blocks: [
+                  {
+                    type: "header",
+                    text: {
+                      type: "plain_text",
+                      text: ((if ((.failedTests // 0) | tostring) == "0" then "✅ " else "❌ " end) + $project + " tests — " + $branch)
+                    }
+                  },
+                  {
+                    type: "section",
+                    fields: [
+                      { type: "mrkdwn", text: ("*Total:* " + ((.totalTestCount // "n/a") | tostring)) },
+                      { type: "mrkdwn", text: ("*Passed:* " + ((.passedTests // "n/a") | tostring)) },
+                      { type: "mrkdwn", text: ("*Failed:* " + ((.failedTests // "n/a") | tostring)) },
+                      { type: "mrkdwn", text: ("*Skipped:* " + ((.skippedTests // "n/a") | tostring)) }
+                    ]
+                  },
+                  {
+                    type: "section",
+                    text: { type: "mrkdwn", text: ("<" + $allure_url + "|View Allure report>  •  <" + $build_url + "|CircleCI build>") }
+                  }
+                ]
+              }' > /tmp/slack_template.json
+
+            echo 'export SLACK_CUSTOM_TEMPLATE=$(cat /tmp/slack_template.json)' >> "$BASH_ENV"
+      # Notify Slack with a test-results summary and a link to the Allure report
       - slack/notify:
           event: fail
-          template: basic_fail_1
-          channel: C0AMCCK29CY # Use channel ID, not name
+          custom: ${SLACK_CUSTOM_TEMPLATE}
+          channel: C075YL2TVFY # #automation_test_results
       - slack/notify:
-          channel: C0AMCCK29CY
+          channel: C075YL2TVFY # #automation_test_results
           event: pass
-          template: success_tagged_deploy_1
+          custom: ${SLACK_CUSTOM_TEMPLATE}
 
 workflows:
   main:
