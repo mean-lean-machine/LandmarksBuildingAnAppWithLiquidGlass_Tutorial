@@ -19,7 +19,10 @@ platform :ios do
       project: "Landmarks.xcodeproj",
       scheme: "Landmarks",
       export_method: "app-store",
-      xcargs: "-allowProvisioningUpdates"
+      xcargs: "-allowProvisioningUpdates " \
+              "-authenticationKeyPath \"#{api_key[:key_filepath]}\" " \
+              "-authenticationKeyID \"#{api_key[:key_id]}\" " \
+              "-authenticationKeyIssuerID \"#{api_key[:issuer_id]}\""
     )
 
     upload_to_testflight(
