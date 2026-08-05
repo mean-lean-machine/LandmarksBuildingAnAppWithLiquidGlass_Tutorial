@@ -101,6 +101,13 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Rebuild Ruby with current OpenSSL
+          command: |
+            brew install openssl@3
+            RUBY_VERSION=$(rbenv version-name)
+            RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)" rbenv install --force "$RUBY_VERSION"
+            rbenv rehash
+      - run:
           name: Install Fastlane
           working_directory: Landmarks
           command: bundle install
