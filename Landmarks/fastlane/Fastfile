@@ -34,6 +34,9 @@ platform :ios do
     File.write(profile_filepath, Base64.decode64(ENV["PROVISIONING_PROFILE"]))
     install_provisioning_profile(path: profile_filepath)
 
+    UI.message("Signing identities visible on the default keychain search list:")
+    sh("security find-identity -v -p codesigning")
+
     profile_plist_path = "#{profile_filepath}.plist"
     sh("security cms -D -i #{profile_filepath.shellescape} > #{profile_plist_path.shellescape}")
     profile_uuid = sh("/usr/libexec/PlistBuddy -c 'Print :UUID' #{profile_plist_path.shellescape}").strip
