@@ -24,10 +24,16 @@ platform :ios do
     cert_filepath = File.join(Dir.mktmpdir, "distribution.p12")
     File.write(cert_filepath, Base64.decode64(ENV["DISTRIBUTION_CERTIFICATE_P12"]))
 
+    UI.message("Contents of the .p12 (metadata only, no key material):")
+    sh("openssl pkcs12 -in #{cert_filepath.shellescape} " \
+       "-passin pass:#{ENV["DISTRIBUTION_CERTIFICATE_PASSWORD"].shellescape} " \
+       "-info -noout 2>&1 || true")
+
     import_certificate(
       certificate_path: cert_filepath,
       certificate_password: ENV["DISTRIBUTION_CERTIFICATE_PASSWORD"],
-      keychain_name: "fastlane_tmp_keychain"
+      keychain_name: "fastlane_tmp_keychain",
+      log_output: true
     )
 
     profile_filepath = File.join(Dir.mktmpdir, "profile.mobileprovision")
