@@ -33,6 +33,7 @@ platform :ios do
       certificate_path: cert_filepath,
       certificate_password: ENV["DISTRIBUTION_CERTIFICATE_PASSWORD"],
       keychain_name: "fastlane_tmp_keychain",
+      keychain_password: "",
       log_output: true
     )
 
