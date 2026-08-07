@@ -2,6 +2,13 @@
 # See: https://circleci.com/docs/reference/configuration-reference
 version: 2.1
 
+# Set via a Scheduled Pipeline trigger (Project Settings > Triggers) to run the
+# nightly-testflight workflow instead of the default push-triggered workflow.
+parameters:
+  run-nightly-testflight:
+    type: boolean
+    default: false
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
 orbs:
@@ -87,10 +94,42 @@ jobs:
           event: pass
           custom: ${SLACK_CUSTOM_TEMPLATE}
 
+  testflight:
+    macos:
+      xcode: 26.6.0
+    resource_class: macos.m1.medium.gen1
+    steps:
+      - checkout
+      - run:
+          name: Rebuild Ruby with current OpenSSL
+          command: |
+            brew install openssl@3
+            RUBY_VERSION=$(rbenv version-name)
+            RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)" rbenv install --force "$RUBY_VERSION"
+            rbenv rehash
+      - run:
+          name: Install Fastlane
+          working_directory: Landmarks
+          command: bundle install
+      - run:
+          name: Build and upload to TestFlight
+          working_directory: Landmarks
+          command: bundle exec fastlane beta
+
 workflows:
   main:
+    when:
+      not: << pipeline.parameters.run-nightly-testflight >>
     jobs:
       - build
+
+  nightly-testflight:
+    when: << pipeline.parameters.run-nightly-testflight >>
+    jobs:
+      - build
+      - testflight:
+          requires:
+            - build
 
 
 
